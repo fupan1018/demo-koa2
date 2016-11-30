@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<style>
+		.set_marg{margin-top:50px;}
+		label{text-align:right;}
+		.set_align{text-align:center;}
+	</style>
+</head>
+<body ng-app="form">
+	<form ng-controller="myContr" name="my" class="container set_marg form-horizontal">
+		<div class="form-group" ng-class="{'has-error':my.username.$dirty&&my.username.$invalid}">
+			<label class="col-sm-2" class="control-label">用户：</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" ng-pattern="/^[a-z]{1}/i" ng-required="true" ng-minlength="5" ng-maxlength="10" name="username" ng-model="username">
+				<div class="alert alert-danger help-block" ng-show="my.username.$dirty&&my.username.$error.minlength">
+					用户名不能小于5位
+				</div>
+				<div class="alert alert-danger help-block" ng-show="my.username.$dirty&&my.username.$error.maxlength">
+					用户名不能大于10位
+				</div>
+				<div class="alert alert-danger help-block" ng-show="my.username.$dirty&&my.username.$error.pattern">
+					用户名要以字母开头
+				</div>
+			</div>
+		</div>
+		<div class="form-group" ng-class="{'has-error':my.pwd.$dirty&&my.pwd.$invalid}">
+			<label class="col-sm-2" class="control-label">密码：</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" name="pwd" ng-model="pwd" ng-required="true" ng-minlength="5" ng-maxlength="10"/>
+				<div class="alert alert-danger help-block" ng-show="my.pwd.$dirty&&my.pwd.$error.minlength">
+					密码不能小于5位
+				</div>
+				<div class="alert alert-danger help-block" ng-show="my.pwd.$dirty&&my.pwd.$error.maxlength">
+					密码不能大于10位
+				</div>
+			</div>
+		</div>
+		<div class="form-group" ng-class="{'has-error':my.spwd.$dirty&&my.spwd.$invalid}">
+			<label class="col-sm-2" class="control-label">确认密码：</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" name="spwd" ng-model="spwd" ng-required="true"/>
+				<div class="alert alert-danger help-block" ng-show="my.spwd.$dirty&&my.spwd.$dirty&&my.pwd.$dirty&&spwd!=pwd">
+					密码不一致！
+				</div>
+			</div>
+		</div>
+		<div class="form-group" ng-class="{'has-error':my.email.$dirty&&my.email.$invalid}">
+			<label class="col-sm-2" class="control-label">邮箱：</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="email" ng-pattern="/^[\w\-]+@[\w\-]+(\.\w{2,8}){1,2}$/" ng-model="email" ng-required="true">
+				<div class="alert alert-danger help-block" ng-show="my.email.$dirty&&my.email.$error.pattern">
+					邮箱格式不正确
+				</div>
+			</div>
+		</div>
+		<div class="form-group" ng-class="{'has-error':my.sex.$dirty&&my.sex.$invalid}">
+			<label class="col-sm-2" class="control-label">性别：</label>
+			<div class="col-sm-10">
+				<label class="radio-inline">
+		     		<input type="radio" name="sex" ng-model="sex" value="0" ng-required="true"/>男
+		     	</label>
+		     	<label class="radio-inline">
+		     		<input type="radio" name="sex" ng-model="sex" value="1" />女
+		     	</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">爱好：</label>
+			<div class="col-sm-10">
+				<label ng-repeat="item in list" class="checkbox-inline">
+					<input type="checkbox" name="box[]" ng-click="toggleHappy(item.id)" ng-checked="data.indexOf(item.id)!=-1">
+					{{item.name}}
+				</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">出生地方</label>
+			<div class="col-sm-3">
+		    	<select class="form-control" ng-change="city.area=false" ng-model="city.province" ng-options="x.id as x.name for x in city | findCity:0">
+		    		
+		    	</select>
+		    </div>
+		    <div class="col-sm-3" ng-show="city.province">
+		    	<select class="form-control" ng-model="city.area" ng-options="x.id as x.name for x in city | findCity:city.province">
+		    		
+		    	</select>
+		    </div>
+		    <div class="col-sm-3" ng-show="city.province&&city.area">
+		    	<select class="form-control" ng-model="city.address" ng-options="x.id as x.name for x in city | findCity:city.area" ng-required="true">
+		    		
+		    	</select>
+		    </div>
+		</div>
+		<div class="form-group set_align">
+			<button class="btn btn-primary" type="submit" ng-disabled="my.$invalid">注册</button>
+			<button class="btn" type="button" ng-click="reset()">重置</button>
+		</div>
+	</form>
+</body>
+</html>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('form',[]);
+	app.filter('findCity',function(){
+		return function(data,parent){
+			var arr=[];
+			angular.forEach(data,function(obj){
+				if(obj.parent==parent){
+					arr.push(obj)
+				}
+			})
+			return arr;
+		}
+	});
+	app.controller('myContr',['$scope',function(scope){
+		scope.city=[
+			{
+				id:1,
+				name:'湖北',
+				parent:0
+			},
+			{
+				id:2,
+				name:'武汉',
+				parent:1
+			},
+			{
+				id:3,
+				name:'孝感',
+				parent:1
+			},
+			{
+				id:4,
+				name:'汉口',
+				parent:2
+			},
+			{
+				id:5,
+				name:'汉阳',
+				parent:2
+			},
+			{
+				id:51,
+				name:'武昌',
+				parent:2
+			},
+			{
+				id:6,
+				name:'汉川',
+				parent:3
+			},
+			{
+				id:7,
+				name:'安陆',
+				parent:3
+			},
+			{
+				id:8,
+				name:'北京',
+				parent:0
+			},
+			{
+				id:9,
+				name:'北京市',
+				parent:8
+			},
+			{
+				id:10,
+				name:'东城区',
+				parent:9
+			},
+			{
+				id:11,
+				name:'西城区',
+				parent:9
+			},
+			{
+				id:12,
+				name:'朝阳区',
+				parent:9
+			},
+		];
+		scope.list=[
+			{
+				id:1,
+				name:'吃饭'
+			},
+			{
+				id:2,
+				name:'睡觉'
+			},
+			{
+				id:3,
+				name:'打豆豆'
+			}
+		];
+		scope.data=[1,2];
+
+		//保存默认值
+		scope.old=angular.copy(scope.data);
+		scope.reset=function(){
+			scope.data=angular.copy(scope.old);
+			scope.my.$setPristine();
+		};
+
+		scope.toggleHappy=function(id){
+			var index=scope.data.indexOf(id);
+			if(index==-1){
+				scope.data.push(id);
+			}else{
+				scope.data.splice(index,1);
+			}
+		};
+
+
+	}]);
+</script>
+

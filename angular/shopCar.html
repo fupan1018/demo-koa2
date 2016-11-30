@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<style>
+		.set_marg{margin-top:50px;}
+	</style>
+</head>
+<body ng-app="shop">
+	<div class="set_marg container" ng-controller="myCar">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>名称</th>
+					<th>数量</th>
+					<th>单价</th>
+					<th>总价</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody  ng-show="carList.length">
+				<tr ng-repeat="item in carList">
+					<td ng-bind="item.id"></td>
+					<td ng-bind="item.name"></td>
+					<td>
+						<button type="button" class="btn btn-success btn-sm" ng-click="noAdd(item.id)">-</button>
+						<input type="text" value="{{item.count}}" ng-model="item.count">
+						<button type="button" class="btn btn-success btn-sm" ng-click="add(item.id)">+</button>
+					</td>
+					<td ng-bind="item.price.toFixed(2)"></td>
+					<td ng-bind="(item.price*item.count).toFixed(2)"></td>
+					<td>
+						<button type="button" class="btn btn-danger btn-xs" ng-click="remove(item.id)">移除</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">总价:</td>
+					<td>{{totalPrice()}}</td>
+					<td>购买数量</td>
+					<td>{{totalCount()}}</td>
+					<td colspan="2">
+						<button type="button" class="btn btn-danger btn-xs" ng-click="removeAll()">清空购物车</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p ng-hide="carList.length" style="text-align:center;">您的购物车为空！</p>
+	</div>
+</body>
+</html>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('shop',[]);
+	app.controller('myCar',['$scope',function(scope){
+		scope.carList=[
+			{
+				id:1,
+				name:'苹果',
+				count:10,
+				price:3.9
+			},
+			{
+				id:2,
+				name:'橘子',
+				count:20,
+				price:2.9
+			},
+			{
+				id:3,
+				name:'香蕉',
+				count:10,
+				price:4.9
+			},
+			{
+				id:4,
+				name:'芒果',
+				count:40,
+				price:5.9
+			},
+			{
+				id:5,
+				name:'菠萝',
+				count:35,
+				price:6
+			},
+		];
+
+		//计算总价格
+		scope.totalPrice=function(){
+			var n=0;
+			angular.forEach(scope.carList,function(item){
+				n+=item.count*item.price;
+			});
+			return n.toFixed(2);
+		};
+
+		//计算总购买数
+		scope.totalCount=function(){
+			var n=0;
+			angular.forEach(scope.carList,function(item){
+				if(parseInt(item.count)==0){
+					n=0;
+				}else{
+					n+=parseInt(item.count);
+				}
+			});
+			return n;
+		};
+
+		//移除方法
+		scope.remove=function(id){
+			var index=-1;
+			angular.forEach(scope.carList,function(item,key){
+				if(item.id==id){
+					scope.carList.splice(key,1);
+				}
+			});
+		};
+
+		//清空购物车
+		scope.removeAll=function(){	
+			scope.carList=[];
+		};
+
+		//增加数量
+		scope.add=function(id){
+			angular.forEach(scope.carList,function(item,key){
+				if(item.id==id){
+					scope.carList[key].count++;
+				}
+			});
+		};
+
+		//减少数量
+		scope.noAdd=function(id){
+			angular.forEach(scope.carList,function(item,key){
+				if(item.id==id){
+					scope.carList[key].count--;
+				}
+				if(item.count<0){
+					item.count=0;
+				}
+			});
+		}
+	}]);
+</script>
+
