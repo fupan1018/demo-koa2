@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<div my-app my-app1>
+			1.将div转化为dom结构
+			2.然后匹配dom上的指令
+		</div>
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]).
+	directive('myApp',function(){
+		return{
+			restrict:'ECAM',
+			template:'<div>然后匹配dom上的指令</div>', 
+			replace:true,
+			compile:function(tElement,tAttrs,transclude){
+				console.log('myApp编译阶段')
+				//tElement 是当前元素的jq对象
+				//tAttrs当前元素的属性，可以设置
+				//可以在compile里面改变DOM结构
+				tElement.append(angular.element('<div>aaaaaaaaaa</div>'));
+				return {
+					//表示在编译阶段之后，链接到下一个指令之前执行（如果有两个指令，是指链接到下一个指令之前）
+					pre:function preLink(scope,iElement,iAttrs,controller){
+						console.log(1)
+					},
+					//所有指令链接后执行
+					post:function postLink(scope,iElement,iAttrs,controller){
+						console.log(2)
+						//它会给每一个元素加上点击事件
+						iElement.on('click',function(){
+							alert(1)
+						})
+					}
+				}
+			}
+			//如果只定义一个link函数，就相当于定义了一个post函数
+			// compile返回的值就是link函数，一般只定义link函数
+			//compile 也可以直接返回一个函数，那么就相当于post函数
+		}
+	}).
+	directive('myApp1',function(){
+		return{
+			restrict:'ECAM',
+			// template:'<div>bbbb</div>', 有两个directive，只能有一个template，否则会报错
+			replace:true,
+			compile:function(tElement,tAttrs,transclude){
+				console.log('myApp1编译阶段')
+				return{
+					pre:function preLink(scope,iElement,iAttrs,controller){
+						console.log(3)
+					},
+					post:function postLink(scope,iElement,iAttrs,controller){
+						console.log(4)
+						iElement.on('click',function(){
+							alert(2)
+						})
+					}
+				}
+			}
+		}
+	}).
+	controller('myContr',function($scope){
+		$scope.user=[
+			{
+				id:1,
+				name:'张三'
+			},
+			{
+				id:2,
+				name:'李四'
+			}
+		];
+	});
+
+//angular.js指令编译三阶段(重要)
+//1.标准浏览器API转化（通过restrict已经转化好了）
+//将html转化成dom，所以自定义的html标签必须符合的格式
+
+//2.angular compile
+//搜索匹配directive，按照priority排序，并执行directive上的compile方法
+
+//3.angular link
+//执行directive上的link方法，进行scope绑定及事件绑定
+
+</script>
+</body>
+</html>

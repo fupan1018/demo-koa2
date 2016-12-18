@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		{{add}}
+		<div my-app add="user" add3="{{user}}" add2="user">
+			<!-- 通过一个user指向add -->
+		</div>
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]).
+	directive('myApp',function(){
+		return{
+			restrict:'ECAM',
+			controller:function($scope){
+				//如果scope为真，controller会自己创建一个scope对象
+				$scope.user=$scope.a();
+				$scope.user=$scope.b;
+			},
+			//scope:true,
+
+
+
+			//是一个对象
+			scope:{
+				//会创建一个独立的作用域
+				//object参数：&--把作用域包装成一个函数，从而以函数的形式读取父作用域的属性
+				//=-----作用域的属性和父级是双向绑定的，任何一方改变，结果都会改变
+				//@-----只能单向读取父元素的属性和方法
+				a:'&add',
+				b:'=add2',
+				c:'@add3'
+
+			},
+			template:'<div ng-repeat="int in user"><span>{{int.name}}</span></div>', 
+			replace:true,
+			controllerAs:'addButton',
+		}
+	}).
+	controller('myContr',function($scope){
+		$scope.user=[
+			{
+		
+				name:'张三'
+			},
+			{
+				
+				name:'李四'
+			}
+		];
+	});
+</script>
+</body>
+</html>

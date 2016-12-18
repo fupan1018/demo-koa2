@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.js"></script>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr" ng-init="arr=['上海','北京','武汉','广州']">
+		<ul>
+			<li ng-repeat="int in arr">
+				<p>{{int}}</p>
+				<span>index:{{$index}}</span><!-- 每一个的索引 -->
+				<span>first:{{$first}}</span><!-- 第一个就返回true -->
+				<span>middle:{{$middle}}</span><!-- 第二个就返回true -->
+				<span>last:{{$last}}</span><!-- 最后一个就返回true -->
+			</li>
+		</ul>
+		<div ng-include="'other.html'">ng-include是加载另外的一个页面</div>
+	</div>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('myContr',function($scope){
+		
+	});
+</script>
+</body>
+</html>

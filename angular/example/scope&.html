@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myCtrl">
+		<drink set="say(name)"></drink>	
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('myCtrl',['$scope',function($scope){
+		$scope.say=function(name){
+			alert(name)
+		}
+	}]);
+	app.directive('drink',function(){
+		return{
+			restrict:'AE',
+			scope:{
+				set:'&'
+			},
+			template:'<input type="text" ng-model="userName" /><br/>'+
+        		 '<button class="btn btn-default" ng-click="set({name:userName})">Greeting</button><br/>'
+			 // ,
+	        // link:function(scope,element,attrs){
+	        // 	scope.set=attrs.set;
+	        // }
+		}
+	});
+	//注解：1.这个儿的scope有三种写法，一种：scope:false（默认），控制器中的scope和指令中的scope是一样的。如果为true时，会创建一个独立的scope，它可以继承控制器的scope（也就是继承它的父级）
+	//2.如果为一个对象（scope:{}）时，当为@时，通过这种方式，相当于set就是myCtrl里面的scope，但是它只能读取父级的属性
+	//3.当=号时，就可以进行读取和修改
+	//4.当为&符是就是以函数的方式访问
+	//实质就是控制器的scope与指令中控制器的关系
+</script>
+</body>
+</html>

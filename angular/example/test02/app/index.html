@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="routerApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap-3.0.0/css/bootstrap.css">
+	<script src="framework/1.3.0.14/angular.js"></script>
+    <script src="framework/1.3.0.14/angular-animate.js"></script>
+    <script src="framework/1.3.0.14/angular-ui-router.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+            <!-- ui-sref="#"   和a标签的额功能类似 是跳转当前页 -->
+            <!-- ui-sref="home"  将地址栏的切换到home -->
+            <!-- ui-sref=".list"  是在地址栏中曾经.list这个参数来实现 -->
+        </div>
+        <ul class="nav navbar-nav">
+            <li>
+                <a ui-sref="home">Home</a>
+            </li>
+            <li>
+                <a ui-sref="about">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div ui-view=""></div>
+        <!-- ui-view是ui-router的视图开始展示的地方 -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="MyCtrl">
+		<loader howToLoad="loadData()">滑动加载1</loader>
+	</div>
+	<div ng-controller="MyCtrl2">
+		<loader howToLoad="loadData2()">滑动加载2</loader>
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('MyCtrl',['$scope',function($scope){
+		$scope.loadData=function(){
+			console.log('数据加载中......111')
+		};
+	}]);
+	app.controller('MyCtrl2',['$scope',function($scope){
+		$scope.loadData2=function(){
+			console.log('数据加载中......222')
+		};
+	}]);
+	app.directive('loader',function(){
+		return {
+			restrict:"AE",
+			link:function(scope,element,attrs){
+				element.on('mouseenter',function(event){
+					// 注意这里的坑，howToLoad会被转换成小写的howtoload
+					scope.$apply(attrs.howtoload)
+				});
+			}
+		}
+	});
+	//注解：1.link方法是等所有的模块加载完后，在执行
+	//2.这就是指令与控制器之间的交互，通过指令来调用控制器上的方法
+</script>
+</body>
+</html>

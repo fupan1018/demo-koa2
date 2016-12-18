@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body ng-app="my">
+<!-- ng-pattern   匹配模式，可以通过正则表达式来匹配 -->
+<!-- autocomplete="off" 关掉自动提示-->
+<!-- ng-class="{'class':true}" 为真就加上class；为假就取消class-->
+<!-- formName.inputName.$dirty 字段是否更改-->
+<!-- formName.inputName.$valid 字段有效-->
+<!-- formName.inputName.$invalid 字段无效-->
+<!-- formName.inputName.$error 错误提示-->
+<div class="container">
+	<form name="myForm" ng-controller="myController" class="form-horizontal" action="www.baidu.com">
+		<div class="form-group" ng-class="{'has-error':myForm.username.$dirty&&myForm.username.$invalid}">
+				<label for="exampleInputEmail1">用户名：</label>
+		    	<input type="text" name="username" class="form-control" id="exampleInputEmail1"
+		    	ng-pattern="/^[a-zA-Z]{1}/" ng-required="true" ng-minlength="5" ng-maxlength="10" ng-model="data.username">
+		    	<div class="alert alert-danger help-block" ng-show="myForm.username.$dirty&&myForm.username.$error.maxlength">
+					用户名不能超过10位
+		    	</div>
+		    	<div class="alert alert-danger help-block" ng-show="myForm.username.$dirty&&myForm.username.$error.minlength">
+					用户名不能小于5位
+		    	</div>
+		    	<div class="alert alert-danger help-block" ng-show="myForm.username.$dirty&&myForm.username.$error.pattern">
+					必须是以英文字母开头
+		    	</div>
+		</div>
+	 	<div class="form-group" ng-class="{'has-error':myForm.password.$dirty&&myForm.password.$invalid}">
+			<label for="exampleInputEmail1">密码：</label>
+	    	<input type="password" name="password" class="form-control" id="exampleInputEmail1"
+	    	ng-required="true" ng-minlength="5" ng-maxlength="10" ng-model="data.password">
+	    	<div class="alert alert-danger help-block" ng-show="myForm.password.$dirty&&myForm.password.$error.maxlength">
+				密码的长度不能超过10位
+	    	</div>
+	    	<div class="alert alert-danger help-block" ng-show="myForm.password.$dirty&&myForm.password.$error.minlength">
+				密码的长度不能小于5位
+	    	</div>
+	  	</div>
+	  	<div class="form-group" ng-class="{'has-error':myForm.sureword.$dirty&&myForm.sureword.$invalid}">
+			<label for="exampleInputEmail1">确认密码：</label>
+	    	<input type="password" name="sureword" class="form-control" id="exampleInputEmail1"
+	    	ng-required="true" ng-model="data.sureword">
+	    	<div class="alert alert-danger help-block" ng-show="myForm.sureword.$dirty&&myForm.sureword.$dirty&&data.password!=data.sureword">
+				密码不一致
+	    	</div>
+	  	</div>
+
+	  	<div class="form-group" ng-class="{'has-error':myForm.email.$dirty&&myForm.email.$invalid}">
+			<label for="exampleInputEmail1">邮箱：</label>
+	    	<input type="email" name="email" class="form-control" id="exampleInputEmail1"
+	    	ng-required="true" ng-minlength="5" ng-maxlength="20" ng-model="data.email">
+	    	<div class="alert alert-danger help-block" ng-show="myForm.email.$dirty&&myForm.email.$error.maxlength">
+				邮箱的长度不能超过20位
+	    	</div>
+	    	<div class="alert alert-danger help-block" ng-show="myForm.email.$dirty&&myForm.email.$error.minlength">
+				邮箱的长度不能小于5位
+	    	</div>
+	    	<div class="alert alert-danger help-block" ng-show="myForm.email.$dirty&&myForm.email.$error.email">
+				邮箱格式不正确
+	    	</div>
+	  	</div>
+
+	  	<div class="form-group" ng-class="{'has-error':myForm.blog.$dirty&&myForm.blog.$invalid}">
+			<label for="exampleInputEmail1">博客网址：</label>
+	    	<input type="url" name="blog" class="form-control" id="exampleInputEmail1"
+	    	ng-required="true" ng-minlength="5" ng-maxlength="20" ng-model="data.blog">
+	    	<div class="alert alert-danger help-block" ng-show="myForm.blog.$dirty&&myForm.blog.$error.maxlength">
+				博客的长度不能超过20位
+	    	</div>
+	    	<div class="alert alert-danger help-block" ng-show="myForm.blog.$dirty&&myForm.blog.$error.minlength">
+				博客的长度不能小于5位
+	    	</div>
+	    	<div class="alert alert-danger help-block" ng-show="myForm.blog.$dirty&&myForm.blog.$error.url">
+				博客格式不正确
+	    	</div>
+	  	</div>
+
+	  	<div class="form-group">
+			<label for="exampleInputEmail1">性别：</label>
+			<label for="radio-inline">
+				<input type="radio" name="sex" ng-model="data.sex" value="1">男
+			</label>
+			<label for="radio-inline">
+				<input type="radio" name="sex" ng-model="data.sex" value="0">女
+			</label>
+	  	</div>
+
+	  	<div class="form-group">
+			<label for="exampleInputEmail1">爱好：</label>
+			<label for="checkbox-inline" ng-repeat="int in data">
+				<input type="checkbox" name="hod[]" ng-checked="god.data.indexOf(int.id)!=-1" value="{{int.id}}" ng-click="toggleTab(int.id)">{{int.name}}
+			</label>
+	  	</div>
+	  	<div class="form-group">
+		    <button type="submit" class="btn btn-default" ng-disabled="myForm.$invalid">注册</button>
+		    <button type="reset" class="btn btn-default" ng-click="reset()">重置</button>
+	  	</div>
+	</form>
+</div>
+</body>
+</html>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('my',[]);
+	app.controller('myController',['$scope',function($scope){
+		$scope.data=[
+			{
+				id:1,
+				name:'吃饭'
+			},
+			{
+				id:2,
+				name:'睡觉'
+			},
+			{
+				id:3,
+				name:'打豆豆'
+			}
+		];
+		$scope.god={
+			data:[1,2]
+		};
+		$scope.toggleTab=function(id){
+			var index=$scope.god.data.indexOf(id);
+			if(index===-1){
+				$scope.god.data.push(id);
+			}else{
+				$scope.god.data.splice(index,1);
+			}
+		};
+		//重置
+		$scope.oldData=angular.copy($scope.god);
+		$scope.reset=function(){
+			$scope.god=angular.copy($scope.oldData);
+			//angular提供的将表单中的其它值重置掉
+			$scope.myForm.$setPristine();
+		};
+	}]);
+</script>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<input type="text" ng-model="name"/>
+		<my-app></my-app>
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]).
+	directive('myApp',function(){
+		//自定义一个指令加载另外一个页面
+		return{
+			restrict:'ECAM',
+			templateUrl:'other.html',
+			replace:true
+		}
+	});
+	app.controller('myContr',function($scope){
+		//可以在other.html使用name这个变量
+		$scope.name='张珊';
+	});
+</script>
+</body>
+</html>

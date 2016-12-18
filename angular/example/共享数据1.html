@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div ng-app="test">
+		<div ng-controller="myContr1">
+			<input type="text" ng-model="data.name"/>
+			my1:{{data.name}}
+		</div>
+		<div ng-controller="myContr2">
+			my2:{{data.name}}
+		</div>
+	</div>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('myContr1',function($scope){
+		$scope.data={
+			name:'张三'
+		};
+	});
+	app.controller('myContr2',function($scope){
+		$scope.data=$scope.$$prevSibling.data;
+		//$scope.$$prevSibling代表上一个控制器(myContr1)；
+		// $$prevSibling.data;它必须是监听整个对象，而不是单个name；
+	});
+</script>
+</body>
+</html>

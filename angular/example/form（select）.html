@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<style>
+		.set{margin-top:100px;}
+	</style>
+</head>
+<body ng-app="test">
+	<form ng-controller="myContr" name="myForm" class="container set form-horizontal">
+		<div class="form-group">
+		    <label class="col-sm-2 control-label">出生地方</label>
+		    <div class="col-sm-3">
+		    	<!-- x.id代表value值   x.name代表所看到的值 -->
+		    	<select ng-change="city.area=false" ng-model="city.s" ng-options="x.id as x.name for x in city | findCity:0" class="form-control" >
+		    		
+		    	</select>
+		    </div>
+		    <div class="col-sm-3" ng-show="city.s">
+		    	<select ng-model="city.area" ng-options="x.id as x.name for x in city | findCity:city.s" class="form-control" >
+		    	</select>
+		    </div>
+		    <div class="col-sm-3" ng-show="city.area&&city.s">
+		    	<select ng-model="city.q" ng-options="x.id as x.name for x in city | findCity:city.area" class="form-control" >
+		    	</select>
+		    </div>
+		</div>
+	</form>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[])
+	//过滤parent=0的数据
+	.filter('findCity',function(){
+		//data 代表要过滤的数据，parent代表索引值
+		//是通过ng-options把数据注入进来的
+		return function(data,parent){
+			var arr=[];
+			angular.forEach(data,function(obj){
+				if(obj.parent==parent){
+					arr.push(obj);
+				} 
+			});
+			return arr;
+		}
+	})
+	.controller('myContr',['$scope',function($scope){
+		$scope.city=[
+			{
+				id:1,
+				name:'湖北',
+				parent:0
+			},
+			{
+				id:2,
+				name:'武汉',
+				parent:1
+			},
+			{
+				id:8,
+				name:'汉口',
+				parent:2
+			},
+			{
+				id:4,
+				name:'北京',
+				parent:0
+			},
+			{
+				id:5,
+				name:'北京市',
+				parent:4
+			},
+			{
+				id:6,
+				name:'东城区',
+				parent:5
+			}
+		]
+	}]);
+	
+
+</script>
+</body>
+</html>

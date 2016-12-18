@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.js"></script>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<input type="text" ng-model="data"/>
+		<div ng-bind="data"></div>
+		{{data}}
+
+		<p>{{123456789 | number:3}}</p>
+		<p>{{12345 | currency}}</p>
+		<p>{{12345 | currency:'rmb'}}</p>
+		<p>{{today | date}}</p>
+		<p>{{today | date:'yyyy'}}</p>
+		<p>{{today | date:'MM'}}</p>
+		<p>{{today | date:'dd'}}</p>
+		<p>{{today | date:'HH'}}</p>
+		<p>{{today | date:'mm'}}</p>
+		<p>{{today | date:'ss'}}</p>
+		<p>{{today | date:'y-MM-d HH:mm:ss'}}</p>
+		
+		<!--从数组中截取3位 -->
+		<p>{{[1,2,3,4,5,6] | limitTo:3}}</p>
+		<!-- 过滤对象、字符串、数组等 -->
+		<p>{{data | filter:'gh'}}</p>
+		<!-- 自定义方法当过滤器 -->
+		<p>{{data | filter:checkName}}</p>
+	</div>
+<script>
+//过滤器是用于数据的格式化，或者筛选函数
+//它的几种语法如下：
+// {{expression|过滤器|过滤器}}
+// {{expression|过滤器:过滤器的参数1：参数2....}}
+	var app=angular.module('test',[]);
+	app.controller('myContr',function($scope,$filter){
+		$scope.data=[
+			{
+				name:'北京',
+				city:'ghijing'
+			},
+			{
+				name:'上海',
+				city:'anghai'
+			},
+			{
+				name:'广州',
+				city:'ghangzhou'
+			}
+
+		];
+		$scope.today=new Date();
+		//将123456进行格式化成number的数字
+		var num=$filter('number')(123456);
+
+		// 用于调试
+		var jsonS=$filter('json')($scope.data)
+		console.log($scope.data)
+
+		//因为数据是双向绑定的，它会自动的将数据返回到obj上
+		$scope.checkName=function(obj){
+			console.log(obj)
+			if(obj.name.indexOf('北')!=-1){
+				return true;
+			}else{
+				return false;
+			}
+		};
+	});
+</script>
+</body>
+</html>

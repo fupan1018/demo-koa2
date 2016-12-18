@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr" class="container">
+		<div class="row">
+		  	<div class="col-lg-3">
+			    <div class="input-group">
+			      <input type="text" class="form-control" placeholder="Search for..." ng-model="search"/>
+			    </div>
+		  	</div>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th ng-class="{dropup:down=='-'}" ng-click="change('id')">产品编号 <span class="caret"></span></th>
+					<!-- ng-class:当后面的为true时，就把dropup这个class注入进去 -->
+					<th ng-class="{dropup:down=='-'}" ng-click="change('name')">产品名称 <span class="caret"></span></th>
+					<th ng-class="{dropup:down=='-'}" ng-click="change('price')">产品单价 <span class="caret"></span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="int in data | filter:search | orderBy:down + up">
+				<!--当down出现，就是负号就进行降序排列-->
+				<!--对编号进行搜索 filter:{id:search}-->
+					<td>
+						{{int.id}}
+					</td>
+					<td>
+						{{int.name}}
+					</td>
+					<td>
+						{{int.price | currency:'￥'}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]);
+	app.service('data',function(){
+		return [
+				{
+					id:4,
+					name:'iPhone',
+					price:4800
+				},
+				{
+					id:2,
+					name:'huaWei',
+					price:3200
+				},
+				{
+					id:3,
+					name:'xiaoMi',
+					price:5500
+				}
+			];
+	});
+	app.controller('myContr',function($scope,data){
+		$scope.data=data;
+		$scope.up='id';
+		$scope.down='';
+		$scope.change=function(type){
+			$scope.up=type;
+			if($scope.down==''){
+				$scope.down='-'
+			}else{
+				$scope.down=''
+			}
+		};
+	});
+</script>

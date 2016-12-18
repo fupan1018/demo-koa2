@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<div my-app>
+			1.将div转化为dom结构
+			2.然后匹配dom上的指令
+		</div>
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]).
+	directive('myApp',function(){
+		return{
+			restrict:'ECAM',
+			controller:function($scope){
+				//跟下面的controller一样
+				$scope.user=[
+					{
+				
+						name:'张三'
+					},
+					{
+						
+						name:'李四'
+					}
+				];
+				this.addFn=function(){
+					alert(1)
+					
+					//触发脏检查
+					$scope.$apply(function(){
+						$scope.user.push({
+							name:'fupan'
+						});
+					});
+				};
+			},
+			template:'<div ng-repeat="int in user"><span>{{int.name}}</span><add-name></add-name></div>', 
+			replace:true,
+			//就是给上面的controller取名字
+			controllerAs:'addButton',
+		}
+	}).
+	directive('addName',function(){
+		return {
+			restrict:'ECMA',
+			require:'^myApp',//获取上面的指令
+			template:'<button>添加</button>',
+			replace:true,
+			link:function(scope,iElement,iAttrs,addButton){
+				iElement.on('click',function(){
+					addButton.addFn();
+				});
+			}
+		}
+	}).
+	controller('myContr',function($scope){
+		
+	});
+</script>
+</body>
+</html>

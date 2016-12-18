@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<div>
+			
+		</div>
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[],function($provide){
+		//$provide.factory;
+		//$provide.service;
+		//$provide.constant;首先运行，可以用它来声明整个作用域常量
+		//$provide.value;
+	}).
+	constant('name','url').
+	value('val','value').
+	run(fucntion(){
+		//就是我可能通过ajax加载数据，在controller中可能会用，我可以通过run加载到缓存中
+		console.log()
+	}).
+	controller('myContr',['name','val',function(name,val){
+		console.log(name)
+		console.log(val)
+	}])
+</script>
+</body>
+</html>

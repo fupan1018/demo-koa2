@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.js"></script>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<input type="text" ng-model="name"/>
+		{{name}}
+	</div>
+</body>
+</html>
+<script>
+	var app=angular.module('test',[],function($provide){//最后一个参数是配置参数，配置的东西给下面用
+		// 通过$provide来自定义服务,cur为服务名
+		$provide.provider('cur',function(){
+			// 自动通过get()方法注入机制，
+			this.$get=function(){
+				// 返回一个对象
+				return{
+					mesg:'张珊'
+				}
+			};
+			// 上面定义这个服务在app中哪里都可以用   (上面的方法不推荐使用)
+		});
+	});
+	app.controller('myContr',function($scope,cur){
+		// cur就可以直接注入进去
+		$scope.name='小白';
+		console.log(cur.mesg)
+	});
+</script>
+
+

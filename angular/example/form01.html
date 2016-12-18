@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body ng-app="test">
+	<form ng-controller="myContr" name="myForm">
+		<div class="form-group" ng-class="{'has-error':myForm.email.$dirty&&myForm.email.$invalid}">
+		    <label class="col-sm-2" >Email address</label>
+		    <div class="col-sm-10">
+		    <!-- ng-required="true" 必须填写 -->
+		    <!-- ng-minlength="5" 最少5位 -->
+		    <!-- ng-maxlength="5" 最少5位 -->
+		    <!-- ng-pattern="/正则表达式/" 匹配模式 -->
+		    <!--定义两个name；通过ng-model监听input的value值 -->
+		    <!-- myForm.email.$error  显示判断条件的布尔值-->
+		    <!--myForm.email.$dirty  字段是否改变，改变后true -->
+		    <!--myForm.email .$invalid  字段是否是无效字段，无效为true -->
+		    <!-- $scope.myForm.$setPristine() 将表单的所有属性重置为原始状态 -->
+		    	<input type="email" class="form-control" ng-required="true" ng-minlength="5" name="email" ng-model="email" ng-pattern="/^[a-z]{1}$/i">
+		    	<!-- {{myForm.email.$error}} -->
+		    	<div class="alert alert-danger help-block" ng-show="myForm.email.$error.minlength">
+		    		用户名长度不合格
+		    	</div>
+		    	<div class="alert alert-danger help-block" ng-show="myForm.email.$error.pattern">
+		    		用户名必须以英文字母开始
+		    	</div>
+		    </div>
+		</div>
+	</form>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('myContr',['$scope',function($scope){
+		
+	}]);
+</script>
+</body>
+</html>

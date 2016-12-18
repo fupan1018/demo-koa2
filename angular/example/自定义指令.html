@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<input type="text" ng-model="name"/>
+		<my-app></my-app>
+		<p class="my-app">我不爱你</p>
+		<p my-app></p>
+		<!-- directive:my-app -->
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[],['$compileProvider',function($compileProvider){
+		console.log($compileProvider)
+		//myApp代表指令名称
+		$compileProvider.directive('myApp',function(){
+			return {
+				//代表指令使用的方式  e代表通过标签；c代表class；a代表属性；m代表注释
+				restrict:'ECAM',
+				template:'<div>我爱你！</div>',
+				replace:true  //它会把my-app替换掉，成div标签
+			}
+		});
+	}]);
+
+	app.controller('myContr',function($scope){
+		$scope.name='张珊';
+	});
+</script>
+</body>
+</html>

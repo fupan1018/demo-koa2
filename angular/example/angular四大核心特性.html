@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.js"></script>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<input type="text" ng-model="name"/>
+		{{name}}
+	</div>
+	<hello></hello>
+<script>
+	
+</script>
+</body>
+</html>
+<script>
+	//第一个大核心就是MVC
+	var app=angular.module('test',[]);
+	//上面的html文件展示就是我们的V层
+	//myContr就是我们的C层
+	app.controller('myContr',['$scope',function($scope){
+		//$scope.name就是我们的M层
+		$scope.name='pan';
+	}]);
+</script>
+
+<script>
+	//第二个大核心就是模块化
+	var app=angular.module('test',[]);
+
+	//下面就是一个模块
+	app.controller('myContr',['$scope',function($scope){
+		$scope.name='pan';
+	}]);
+</script>
+
+<script>
+	//第三个大核心就是指令系统
+	var app=angular.module('test',[]);
+	app.directive('hello',function(){
+		return{
+			restrict:'ECA',
+			template:'<div>Hello,kitty</div>',
+			replace:true
+		}
+	})
+</script>
+
+
+<script>
+	//第四个大核心就是双向数据绑定
+	var app=angular.module('test',[]);
+
+	//输入框的数据和控制层中的数据同时变化
+	
+	app.controller('myContr',['$scope',function($scope){
+		$scope.name='pan';
+	}]);
+</script>
+

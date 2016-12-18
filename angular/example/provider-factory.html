@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<input type="text" ng-model="name"/>
+		{{name}}
+	</div>
+</body>
+</html>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[],function($provide){
+		// 自定义工厂,cur工厂的名字
+		$provide.factory('cur',function(){
+			return [1,2,3];
+		});
+		//它可以返回任何数据类型
+	});
+	app.controller('myContr',function($scope,cur){
+		$scope.name='小白';
+		console.log(cur);
+	});
+</script>
+
+

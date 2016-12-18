@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.js"></script>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<input type="text" ng-model="name"/>
+		<input type="text" ng-model="age"/>
+		<div ng-bind="name"></div>
+		<div ng-bind="age"></div>
+		{{name}}
+		{{age}}
+	</div>
+<script>
+	var app=angular.module('test',[]);
+	//这个是隐式依赖注入，当代码被压缩的时候$scope会被替换掉
+	app.controller('myContr',function($scope){
+		$scope.name='张珊';
+		$scope.age=18;
+
+	});
+
+	//显示注入法(跟上面的效果一样的)
+	app.controller('myContr',['$scope','$filter',function(a,b){
+		//函数里面的参数就可以随便修改
+		a.name='张珊';
+		a.age=18;
+	}]);
+
+
+	//定义控制器的注入方式
+	function otherContr(a){
+		console.log(a)
+	}
+	//将$scope注入到otherContr这个方法中
+	otherContr.$inject=['$scope'];
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 控制器使用的地方：
+// controller应该仅仅包含单个视图所需要的业务逻辑，保持controller的简单性，将不需要的东西抽出来放在service中，通过依赖注入到controller中
+
+// 不要在controller中做的事：
+// 1.不要进行dom操作（dom操作应该是在指令里面）
+// 2.input（输入格式化）	--使用angular controls代替
+// 3.outInput（输出格式化）使用filters来代替
+
+</script>
+</body>
+</html>

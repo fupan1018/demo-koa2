@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	
+</head>
+<body ng-app="test">
+	<div class="container" ng-controller="my">
+		<table class="table">
+		  	<thead>
+		  		<tr>
+		  			<th>编号</th>
+		  			<th>名称</th>
+		  			<th>数量</th>
+		  			<th>单价</th>
+		  			<th>总价</th>
+		  			<th>操作</th>
+		  		</tr>
+		  	</thead>
+		  	<tbody ng-show="car.length">
+		  		<tr ng-repeat="item in car">
+		  			<td ng-bind="item.id"></td>
+		  			<td ng-bind="item.name"></td>
+		  			<td>
+		  				<button type="button" class="btn btn-primary btn-sm" ng-click="noAdd(item.id)">-</button>
+		  				<input type="text" value="{{item.count}}" ng-model="item.count">
+		  				<button type="button" class="btn btn-primary btn-sm" ng-click="add(item.id)">+</button>
+		  			</td>
+		  			<td ng-bind="item.price"></td>
+		  			<td ng-bind="item.price*item.count"></td>
+		  			<td>
+		  				<button type="button" class="btn btn-danger btn-xs" ng-click="remove(item.id)">移出</button>
+		  			</td>
+		  			
+		  		</tr>
+		  		<tr>
+		  			<td>总价</td>
+		  			<td>{{totalPrice()}}</td>
+		  			<td>购买数量</td>
+		  			<td>{{totalCount()}}</td>
+		  			<td colspan="2">
+		  				<button type="button" class="btn btn-danger btn-xs" ng-click="removeAll()">清空购物车</button>
+		  			</td>
+		  		</tr>
+		  	</tbody>
+		</table>
+		<p ng-hide="car.length">您的购物车为空！</p>
+	</div>
+</body>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('my',function($scope){
+		$scope.car=[
+			{
+				id:1,
+				name:'手机',
+				count:10,
+				price:3000
+			},
+			{
+				id:2,
+				name:'电视机',
+				count:50,
+				price:5000
+			},
+			{
+				id:3,
+				name:'收音机',
+				count:80,
+				price:6000
+			}
+		];
+		// 计算总价
+		$scope.totalPrice=function(){
+			var n=0;
+			//forEach就是循环  $scope.car是指要循环的东西    item将循环后得东西暂时储存在item上面
+			angular.forEach($scope.car,function(item){
+				n+=item.count*item.price;
+			});
+			return n;
+		};
+		// 计算数量
+		$scope.totalCount=function(){
+			var n=0;
+			angular.forEach($scope.car,function(item){
+				if(parseInt(item.count)==0){
+					n=0;
+				}else{
+					n+=parseInt(item.count);
+				}
+			});
+			return n;
+		};
+		// 移出方法
+		$scope.remove=function(id){
+			var index=-1;
+			angular.forEach($scope.car,function(item,key){
+				// key就是移出按钮的索引值
+				if(item.id==id){
+					index=key;
+				}
+			});
+			// 如果找到了那个item就删掉哪个
+			if(index!=-1){
+				$scope.car.splice(index,1);
+			}
+		};
+		// 清空购物车
+		$scope.removeAll=function(){
+			$scope.car=[];
+		};
+		// 添加购物数量
+		$scope.add=function(id){
+			var index=-1;
+			angular.forEach($scope.car,function(item,key){
+				// key就是移出按钮的索引值
+				if(item.id==id){
+					index=key;
+				}
+			});
+			if(index!=-1){
+				$scope.car[index].count++;
+			}
+		};
+		// 减少购物数量
+		$scope.noAdd=function(id){
+			var index=-1;
+			angular.forEach($scope.car,function(item,key){
+				// key就是移出按钮的索引值
+				if(item.id==id){
+					index=key;
+				}
+			});
+			if(index!=-1){
+				var item=$scope.car[index];
+				if(item.count>1){
+					item.count--
+				}else{
+					var reKey=confirm('将从购物车移出！')
+					if(reKey){
+						$scope.remove(id);
+					}
+				}
+			}
+		};
+		// 解决数据通过输入时的bug
+		$scope.$watch('car',function(newValue,oldValue){
+			angular.forEach(newValue,function(item,key){
+				if(item.count<1){
+					var reKey=confirm('将从购物车移出！')
+					if(reKey){
+						$scope.remove(item.id);
+					}else{
+						item.count=oldValue[key].count;
+					}
+				}
+			});
+		},true);
+	});
+</script>
+</html>
+

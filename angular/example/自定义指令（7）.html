@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<hello></hello>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]);
+	app.run(function($templateCache){
+		$templateCache.put('allName','<div>第一个参数是名称，第二个是内容</div>')
+	});
+	app.directive('hello',function($templateCache){
+		return {
+			restrict:'ECMA',
+			template:$templateCache.get('allName'),
+			replace:true
+		}
+	});
+	//1.注解：$templateCache.put有两个参数一个是名字，一个内容
+	//2.然后通过$templateCache.get这个方法获取到上面的内容
+	//3.run是当所有的模板都加载完了在执行（不过只执行一次）
+</script>
+</body>
+</html>

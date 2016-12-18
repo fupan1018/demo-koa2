@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/angular.js"></script>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr" ng-init="arr=['上海','北京','武汉','广州']">
+		<ul>
+			<li ng-repeat="int in arr">
+				<p>{{int}}</p>
+				<span>index:{{$index}}</span><!-- 每一个的索引 -->
+				<span>first:{{$first}}</span><!-- 第一个就返回true -->
+				<span>middle:{{$middle}}</span><!-- 第二个就返回true -->
+				<span>last:{{$last}}</span><!-- 最后一个就返回true -->
+			</li>
+		</ul>
+		<p><button ng-click="change($event)">切换按钮</button></p>
+		注入$event事件对象
+		<p>{{status}}</p>
+	</div>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('myContr',function($scope){
+		$scope.status=false;
+		$scope.change=function(event){
+			//当前目标就是this对象
+			console.log(event.target)
+			//将当前对象转化成jq对象
+			angular.element(event.target).html('呵呵')
+			$scope.status=!$scope.status;
+		};
+	});
+</script>
+</body>
+</html>

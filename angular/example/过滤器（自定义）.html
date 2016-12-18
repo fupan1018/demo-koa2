@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<ul>
+			<li ng-repeat="int in data | filterAge">
+				{{int.name}}
+				{{int.age}}
+				{{int.city}}
+			</li>
+		</ul>		
+	</div>
+</body>
+</html>
+<script src="js/angular.js"></script>
+<script>
+	//$filterProvider自定义过滤器要注入的
+	//$provider导入数据要注入的
+	var app=angular.module('test',[],function($filterProvider,$provide,$controllerProvider){
+		$provide.service('data',function(){
+			return [
+				{
+					name:'fupan',
+					age:18,
+					city:'beijing'
+				},
+				{
+					name:'huangwei',
+					age:30,
+					city:'shamghai'
+				}
+			];
+		});
+		//注册一个过滤器的名字为filterAge,当使用filterAge的时候，自动把data传到obj中，因为数据是双向绑定的
+		$filterProvider.register('filterAge',function(){
+			return function(obj){
+				var arr=[];
+				angular.forEach(obj,function(o){
+					if(o.age<20){
+						arr.push(o);
+					}
+				});
+				return arr;
+			}
+		});
+		//通过注册的方式创造controller
+		$controllerProvider.register('myContr',function($scope,data){
+			$scope.data=data;
+		});
+
+	});
+</script>

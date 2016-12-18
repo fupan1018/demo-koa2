@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var A=function(){
+			this.getName=function(){
+				return '张三'
+			};
+		};
+		var B=function(aObj){
+			// B依赖于a
+			document.write(aObj.getName());
+		};
+		var a=new A;
+		//a注入b
+		var b=new B(a);
+	</script>
+</body>
+</html>

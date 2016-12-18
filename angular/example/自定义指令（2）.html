@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<input type="text" ng-model="name"/>
+		<my-app></my-app>
+		<p class="my-app">我不爱你</p>
+		<p my-app></p>
+		<!-- directive:my-app -->
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[],['$compileProvider',function($compileProvider){
+		console.log($compileProvider)
+		//myApp代表指令名称
+		$compileProvider.directive('myApp',function(){
+			return {
+				restrict:'ECAM',
+				template:'<div>我爱你！<span ng-transclude></span> </div> ',
+				//transclude为真它不会把原始数据替换掉，而是放在指定的地方ng-transclude
+				transclude:true,
+
+				replace:true,
+				priority:-1,   //指令执行的优先级，默认为0
+				terminal:true  //只要权重小于-1的都不会执行。
+			}
+		});
+	}]);
+
+	app.controller('myContr',function($scope){
+		$scope.name='张珊';
+	});
+</script>
+</body>
+</html>

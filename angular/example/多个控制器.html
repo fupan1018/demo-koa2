@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div ng-app='test'>
+		<div ng-controller="myContr">
+			<input type="text" ng-model="name"/>
+			<div ng-controller="my">
+				<input type="text" ng-model="name"/>
+			</div>
+		</div>
+	</div>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('myContr',function($scope){
+		$scope.name='张珊';
+	});
+	app.controller('my',function($scope){
+		$scope.name='';
+	});
+	//它的作用域跟js是一样的，
+</script>
+</body>
+</html>

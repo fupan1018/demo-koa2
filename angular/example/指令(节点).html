@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/angular.js"></script>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<div ng-style="style"></div>
+		<div>
+	</div>
+	ng-class-even  	偶数的class
+	ng-class-add	奇数的class
+	<ul ng-switch on="status">
+		<li ng-switch-when="true">当status为真的时候，执行</li>
+		<li ng-switch-when="false">当status为假的时候，执行</li>
+	</ul>
+	<div ng-if="status">真的就执行</div>
+	<img ng-src="" alt="">用于图片的加载，跟ng-bind一样
+	<img ng-href="" alt="">同上
+
+<script>
+	var app=angular.module('test',[]);
+	app.controller('myContr',function($scope){
+		$scope.style={
+			background:'red',
+			width:'200px',
+			height:'200px',
+			border:'1px solid black',
+			'margin-top':'200px'
+		}
+	});
+</script>
+</body>
+</html>

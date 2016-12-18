@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.js"></script>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<input type="text" ng-model="name"/>
+		{{count}}
+	</div>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('myContr',function($scope){
+		$scope.name='张三';
+		$scope.count=0;
+		$scope.$watch('name',function(newValue,oldValue){
+			$scope.count++;
+		});
+		//$watch表示事件的监听，它有三个参数，第一个参数是表达式和字符串；第二参数是函数，当改变后才会触发；第三个参数是布尔值，是否监听所有属性
+		$scope.data={
+			name:'张三',
+			count:20
+		};
+		$scope.$watch('data',function(newValue,oldValue){
+			//如果是true,就监听data对象中的所有属性
+			//如果是false，就监听data对象，只有data从json变成数组后，才会触发前面的function。
+		},true);
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div ng-controller="myContr">
+		<div my-app>
+			1.将div转化为dom结构
+			2.然后匹配dom上的指令
+		</div>
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]).
+	directive('myApp',function(){
+		return{
+			restrict:'ECAM',
+			controller:function($scope){
+				//跟下面的controller一样
+				$scope.user=[
+					{
+						id:1,
+						name:'张三'
+					},
+					{
+						id:2,
+						name:'李四'
+					}
+				];
+				$scope.addFn=function(){
+					alert('增加的函数!')
+				};
+			},
+			template:'<div ng-repeat="int in user">{{int.name}}</div>', 
+			replace:true,
+			//就是给上面的controller取名字
+			controllerAs:'book',
+			// 将book注入进去
+			//attrs 可以在标签上定义一个属性，然后通过attrs去查找
+			link:function(scope,element,attrs,book){
+				console.log(scope)
+				element.bind('mouseenter',scope.addFn)
+			}
+		}
+	}).
+	controller('myContr',function($scope){
+		//上面的controller就是下面的myContr；这样写可以在多个指令中实现依赖注入
+	});
+
+//angular.js指令编译三阶段(重要)
+//1.标准浏览器API转化（通过restrict已经转化好了）
+//将html转化成dom，所以自定义的html标签必须符合的格式
+
+//2.angular compile
+//搜索匹配directive，按照priority排序，并执行directive上的compile方法
+
+//3.angular link
+//执行directive上的link方法，进行scope绑定及事件绑定
+
+</script>
+</body>
+</html>

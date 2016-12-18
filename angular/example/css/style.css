@@ -1,0 +1,4 @@
+@charset 'utf-8';
+*{margin:0;padding:0;}
+li{list-style:none;}
+button:hover{text-decoration:none;}

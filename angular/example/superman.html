@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="test">
+	<div class="row">
+		<div class="col-md-3">
+			<superman strength>动感超人---力量</superman>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<superman strength speed>动感超人2---力量+敏捷</superman>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<superman strength speed light>动感超人3---力量+敏捷+发光</superman>
+		</div>
+	</div>
+<script src="js/angular.js"></script>
+<script>
+	var myModule=angular.module('test',[]);
+	myModule.directive('superman',function(){
+		return {
+	        scope: {},
+	        restrict: 'AE',
+	        controller: function($scope) {
+	            $scope.abilities = [];
+	            this.addStrength = function() {
+	                $scope.abilities.push("strength");
+	            };
+	            this.addSpeed = function() {
+	                $scope.abilities.push("speed");
+	            };
+	            this.addLight = function() {
+	                $scope.abilities.push("light");
+	            };
+	        },
+	        link: function(scope, element, attrs) {
+	            element.addClass('btn btn-primary');
+	            element.bind("mouseenter", function() {
+	                console.log(scope.abilities);
+	            });
+	        }
+	    }
+	});
+
+	myModule.directive("strength", function() {
+	    return {
+	        require: '^superman',
+	        link: function(scope, element, attrs, supermanCtrl) {
+	            supermanCtrl.addStrength();
+	        }
+	    }
+	});
+	myModule.directive("speed", function() {
+	    return {
+	        require: '^superman',
+	        link: function(scope, element, attrs, supermanCtrl) {
+	            supermanCtrl.addSpeed();
+	        }
+	    }
+	});
+	myModule.directive("light", function() {
+	    return {
+	        require: '^superman',
+	        link: function(scope, element, attrs, supermanCtrl) {
+	            supermanCtrl.addLight();
+	        }
+	    }
+	});
+	//注解：1.要给外面暴露方法时，就把方法写在controller中
+	//2.如果要定义事件，就把方法写在link函数中
+	//3.scope：{}定义独立的scope
+	//4.require: '^superman' 依赖superman这个指令
+	//5.supermanCtrl 可以通过controllerAs:'supermanCtrl' 给上面定义controller名
+</script>
+</body>
+</html>

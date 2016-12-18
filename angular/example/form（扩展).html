@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<style>
+		.set{margin-top:100px;}
+	</style>
+</head>
+<body ng-app="test">
+	<form ng-controller="myContr" name="myForm" class="container set form-horizontal">
+		<div class="form-group" ng-class="{'has-error':myForm.email.$dirty&&myForm.email.$invalid}">
+		    <label class="col-sm-2" class="control-label">扩展</label>
+		    <div class="col-sm-10">
+		    	<input type="number" min="0" class="form-control" ng-required="true" ng-minlength="2" name="email" ng-model="email">
+		    	<div class="alert alert-danger help-block" ng-show="myForm.email.$error.minlength">
+		    		不能少于两位
+		    	</div>
+		    </div>
+		</div>
+		</div>
+	</form>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('test',[]);
+	app.controller('myContr',['$scope',function($scope){
+		$scope.list=[
+			{
+				id:1,
+				name:'苹果'
+			},
+			{
+				id:2,
+				name:'橘子'
+			},
+			{
+				id:3,
+				name:'西瓜'
+			}
+		];
+		$scope.data=[1,2];
+		$scope.tick=function(id){
+			var index=$scope.data.indexOf(id);
+			if(index==-1){
+				$scope.data.push(id);
+			}else{
+				$scope.data.splice(index,1);
+			}
+		};
+	}]);
+</script>
+</body>
+</html>

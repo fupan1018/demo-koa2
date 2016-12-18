@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/angular.js"></script>
+</head>
+<body>
+	<div ng-app="test">
+		<div ng-controller="myContr1">
+			<input type="text" ng-model="Data.mesg"/>
+			<p>my1:{{Data.mesg}}</p>
+		</div>
+		<div ng-controller="myContr2">
+			my2:{{Data.mesg}}
+		</div>
+	</div>
+<script>
+	var app=angular.module('test',[]);
+	app.factory('Data',function(){
+		return {
+			mesg:'共享数据'
+		}
+	});
+	app.controller('myContr1',function($scope,Data){
+		$scope.Data=Data;
+	});
+	app.controller('myContr2',function($scope,Data){
+		$scope.Data=Data;
+	});
+</script>
+</body>
+</html>
