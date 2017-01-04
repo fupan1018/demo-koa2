@@ -1,0 +1,13 @@
+requirejs.config({
+	paths:{
+		jquery:'jquery.min',
+		back:'scroll',
+		scroll:'tool'
+	}
+});
+requirejs(['jquery','scroll'],function($,scroll){
+	$('#backTop').scrollTo({
+		pos:10,
+		speed:500
+	});
+});

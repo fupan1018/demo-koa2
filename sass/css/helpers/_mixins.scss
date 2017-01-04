@@ -1,0 +1,23 @@
+@mixin set_transform($option){
+	-webkit-transform:$option;
+	-moz-transform:$option;
+	-ms-transform:$option;
+	-o-transform:$option;
+	transform:$option;
+}
+
+@mixin set_origin($option:0 0){
+	-webkit-transform-origin:$option;
+	-moz-transform-origin:$option;
+	-ms-transform-origin:$option;
+	-o-transform-origin:$option;
+	transform-origin:$option;
+}
+
+@mixin set_transition($option:0.5s all ease){
+	-webkit-transition:$option;
+	-moz-transition:$option;
+	-ms-transition:$option;
+	-o-transition:$option;
+	transition:$option;
+}

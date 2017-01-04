@@ -1,0 +1,77 @@
+$tool-width:52px;
+$erweima-width:160px;
+@import "../helpers/mixins";
+@mixin set_img{
+	background-image:url(../../img/toolbar.png);
+	background-repeat:no-repeat;
+}
+@mixin set_pos($pos,$hover_pos){
+	background-position:0 $pos;
+	&:hover{
+		background-position:0 $hover_pos;
+	}
+}
+
+.tool{
+	width:$tool-width;
+	position:fixed;
+	left:50%;
+	bottom:20px;
+	margin-left:-$tool-width/2;
+	.tool_bar{
+		position:relative;
+		display:block;
+		width:$tool-width;
+		height:$tool-width;
+		margin-top:1px;
+		@include set_img;
+		@include set_transition(1s all ease);
+		.erweima{
+			width:$erweima-width;
+			@include set_img;
+			position:absolute;
+			left:-$erweima-width;
+			@include set_transform(scale(0));
+			@include set_transition(1s all ease);
+			@include set_origin(right bottom);
+		}
+	}
+	.tool_yj{
+		@include set_pos(-426px,-488px);
+	}
+	.tool_app{
+		@include set_pos(-550px,-612px);
+		.erweima_app{
+			height:200px;
+			background-position:-6px -226px;
+			bottom:-18px;
+		}
+		&:hover .erweima_app{
+			background-position:-6px -226px;
+			@include set_transform(scale(1));
+		}
+	}
+	.tool_fh{
+		@include set_pos(-674px,-736px);
+	}
+	.tool_wexin{
+		@include set_pos(-798px,-860px);
+		.erweima_weixin{
+			height:206px;
+			background-position:-6px -2px;
+			bottom:-5px;
+		}
+		&:hover .erweima_weixin{
+			background-position:-6px -2px;
+			@include set_transform(scale(1));
+		}
+	}
+}
+
+
+
+
+
+
+
+

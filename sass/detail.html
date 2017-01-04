@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	/* 
+1. $ 代表定义变量；
+2. 类似与js中的变量作用域
+3. 变量的位置是限制的，代码是从上到下执行；
+4. 子元素是可以访问父级的变量的；
+5. !default 是指如果前面有申明，就用前面的；如果没有的话，就用这个默认的；
+6. &代表当前元素，类似于js中的this；
+7. @import '文件名';  可以向style.scss中引入base.scss文件；也可以写到标签里面；
+8. @mixin 变量名   里面定义大量重用的代码；通过@include 变量名   来调用；
+9. 注意@mixin和@include的书写格式；里面是可以传参；
+10.@extend 适用于样式的重用；继承某一个元素的样式；
+
+
+//高级语法
+1.
+*/
+@import 'base/base';
+$nav-color:#666;
+$border-color:yellow;
+$nav-height:200px;
+$border:10px solid $border-color;
+
+body{
+	background:$bodybg
+}
+.nav{
+	$color:black;
+	border:$border;
+	$width:(200px/2);
+	width:$width;
+	background:$nav-color;
+	height:$nav-height;
+	
+	p{
+		color:$color;
+	}
+	&:hover{
+		background:$border-color;
+	}
+}
+
+.nav01{
+	$color:pink;
+	$color:red !default;
+	color:$color;
+}
+
+.nav02{
+	$width:200px;
+	$height:200px;
+	$border:2px solid #333;
+	width:$width;
+	height:$height;
+	border:$border{
+		top:0;
+	};
+}
+
+.nav03{
+	$width:200px;
+	$height:200px;
+	$color:#666;
+	@mixin border-style{
+		border:3px solid black;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+		border-radius:5px;
+	}
+	width:$width;
+	height:$height;
+	@include border-style;
+}
+
+.nav04{
+	@mixin border-style($width,$height,$border,$border-radius){
+		width:$width;
+		height:$height;
+		-webkit-border-radius:$border-radius;
+		-moz-border-radius:$border-radius;
+		border-radius:$border-radius;
+		border:$border;
+	}
+	@include border-style(
+		$width:200px,
+		$height:200px,
+		$border-radius:10px,
+		$border:1px solid black
+	);	
+}
+
+.nav05{
+	height:200px;
+	width:200px;
+	background-color:red;
+	p{
+		@extend .nav05;
+		height:100px;
+		background-color:yellow;
+	}
+}
+
+/*
+高级语法
+
+1. @if 判断语法
+2. 内置函数  如颜色函数：
+		lighten(#cc3, 10%) 	// #d6d65c
+　　	darken(#cc3, 10%) 	// #a3a329
+　　	grayscale(#cc3) 	// #808080
+　　	complement(#cc3) 	// #33c
+3. 支持for循环语句
+4. 支持while循环语句
+5. 代表属性名的表示 见129行
+6. 注意139行的写法，之间要加空格，防止报错
+7. $all:{margin,padding}
+   @each $item in $all{
+   		#{$item}-left:4px;
+   }
+*/
+
+.nav06{
+	width:200px;
+	height:200px;
+	margin:0 auto;
+	@if 1+1==2 {
+		border:1px solid red;
+	};
+	@if 1+1==2{
+		border:1px solid yellow;
+	} @else {
+		border:1px solid pink;
+	}
+	background:lighten(#cc3, 10%);
+
+
+	@for $i from 1 to 2 {
+		.border-#{$i} {border: #{$i}px solid blue;}
+	}
+	
+	@for $i from 1 to 3{
+		.itme-#{$i} { width: 2px * $i;}
+	}
+
+	$j:6;
+	@while $j> 0 {
+		.items-#{$j} {width:2em * $j;}
+		$j: $j - 2;
+	}
+
+}
+
+//自定义函数
+@function double($n) {
+	@return $n * 40
+}
+
+
+.nav07{
+	width:double(5px);
+
+}
+
+//占位符%name
+%bg-image {
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.image-one {
+    @extend %bg-image;
+    background-image:url(/img/image-one.jpg);
+}
+
+.image-two {
+    @extend %bg-image;
+    background-image:url(/img/image-two.jpg);
+}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
