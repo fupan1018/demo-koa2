@@ -1,0 +1,69 @@
+*{margin:0;padding:0;}
+li{list-style:none;}
+input{outline:none;}
+/*实战01 start*/
+.list{width:100%;}
+.list li{display:-webkit-flex;display:flex;flex-direction:column;padding-bottom:6%;border-bottom:1px solid #b6b6b6;}
+.hd{display:-webkit-flex;display:flex;flex-direction:row;height:50px;line-height:50px;color:#bdbdbd;}
+.hd h5{flex:1;font-size:24px;text-align:right;padding-right:8%;}
+.hd p{flex:1;font-size:14px;color:#bdbdbd;}
+.item01{display:flex;display:-webkit-flex;margin:0 6%;}
+.item01 a{width:25%;text-align:center;margin:0 8% 0 0;}
+.item01 .txt{flex:1;}
+.txt p{height:24px;line-height:24px;color:#bdbdbd;}
+/*实战01 end*/
+
+
+
+/*实战02 start*/
+.box-02{width:100%;display:-webkit-flex;flex-direction:column;}
+.box-02 h4{text-align:center;height:40px;line-height:40px;font-size:24px;color:#333;}
+form{width:80%;padding:0 9.9%;display:-webkit-flex;display:flex;flex-direction:column;}
+form p{width:100%;height:40px;line-height:40px;border:1px solid #666;margin-top:10px;
+	display:-webkit-flex;display:flex;
+}
+form p label{width:30%;text-align:right;}
+form p input{width:70%;border:none;}
+.last-02 input{width:55%;}
+.btn-02 input{width:100%;}
+/*实战02 end*/
+
+
+/*实战03 start*/
+.box-03{width:100%;}
+.header03{background:yellow;height:80px;}
+.cont03{display:flex;flex-direction:column;}
+.nav03{border-top:2px solid #fff;display:flex;flex-wrap:wrap;}
+.nav03 .pub{flex:1;background:#ccc;align-items:center;height:80px;}
+.nav03 .sub{flex:2;background:red;display:flex;flex-wrap:wrap;}
+.nav03 .sub span{width:50%;box-sizing:border-box;border-right:1px solid #fff;
+	border-bottom:1px solid #fff;height:40px;line-height:40px;}
+
+/*实战03  end*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

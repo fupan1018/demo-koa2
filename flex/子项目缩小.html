@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div p{width:200px;height:80px;border:1px solid #333;}
+		div{display:-webkit-flex;display:flex;border:1px solid red;font-size:20px;height:300px;}
+		/*flex-shrink:定义子项目缩小 类似与z-index  默认为0 没有负值.当空间不足的时候，首先缩小item02*/
+		.box1 p{flex-shrink:1;}
+		.box1 .item02{flex-shrink:0;}
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<p class="item01">11</p>
+		<p class="item02">22</p>
+		<p class="item03">33</p>
+		<p class="item04">44</p>
+	</div>
+</body>
+</html>

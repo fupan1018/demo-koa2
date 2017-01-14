@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div p{width:200px;height:80px;border:1px solid #333;}
+		div{display:-webkit-flex;display:flex;border:1px solid red;font-size:20px;height:300px;}
+		/*align-self:设置单个项目的排列方式 他有六个值:auto flex-start/end
+		  center  baseline  stretch
+		*/
+		.box1 .item02{align-self:center;}
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<p class="item01">11</p>
+		<p class="item02">22</p>
+		<p class="item03">33</p>
+		<p class="item04">44</p>
+	</div>
+</body>
+</html>

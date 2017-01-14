@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div p{width:200px;height:80px;border:1px solid #333;}
+		div{display:-webkit-flex;display:flex;border:1px solid red;font-size:20px;height:150px;}
+		/*align-items:定义项目垂直的对齐方式*/
+		.box1{align-items:flex-start;}
+		/*flex-start:代表从顶部对齐*/
+
+		.box2{align-items:flex-end;}
+		/*flex-end:代表从右侧对齐*/
+
+		.box3{align-items:center;}
+		/*center:中间对齐*/
+
+		.box4{align-items:stretch;}
+		/*stretch:高度充满整个屏幕 默认值*/
+
+		.box5{align-items:baseline;}
+		/*baseline:项目的第一行文字的基线对齐*/
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<p>11</p>
+		<p>22</p>
+	</div>
+	<div class="box2">
+		<p>11</p>
+		<p>22</p>
+	</div>
+	<div class="box3">
+		<p>11</p>
+		<p>22</p>
+		<p>33</p>
+	</div>
+	<div class="box4">
+		<p>11</p>
+		<p>22</p>
+		<p>33</p>
+	</div>
+
+	<div class="box5">
+		<p>11</p>
+		<p>22</p>
+		<p>33</p>
+	</div>
+</body>
+</html>

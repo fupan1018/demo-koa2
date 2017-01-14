@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div p{width:200px;height:100px;border:1px solid #333;}
+		.box1{display:-webkit-flex;display:flex;border:1px solid red;font-size:20px;}
+		.box2{display:-webkit-flex;display:inline-flex;border:1px solid red;font-size:20px;}
+
+		/*flex-wrap:项目排成一条线  有三个值*/
+		.box3{display:-webkit-flex;display:flex;flex-wrap:nowrap;}
+		/*flex-wrap:nowrap  表示不换行，进行弹性缩放*/
+
+		.box3{flex-wrap:wrap;}
+		/*flex-wrap:wrap  表示换行*/
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<p>11</p>
+		<p>22</p>
+	</div>
+	<div class="box2">
+		<p>33</p>
+		<p>44</p>
+	</div>
+	<div class="box3">
+		<p>55</p>
+		<p>66</p>
+		<p>66</p>
+		<p>66</p>
+		<p>66</p>
+		<p>66</p>
+		<p>66</p>
+		<p>66</p>
+		<p>66</p>
+		<p>66</p>
+		<p>66</p>
+		<p>77</p>
+		<p>66</p>
+		<p>66</p>
+	</div>
+</body>
+</html>

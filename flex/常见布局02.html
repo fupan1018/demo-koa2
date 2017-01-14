@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body,html{height:100%;text-align:center;}
+		*{margin:0;padding:0;}
+		.box{display:flex;height:100%;flex-direction:column;background:#ccc;font-size:30px;}
+		header,footer{flex:1;align-self:center;display:flex;}
+		header span{align-self:flex-start;}
+		footer span{align-self:flex-end;}
+		.cont{flex:1;display:flex;}
+		.c{flex:1;}
+		.l,.r{flex:0 0 15%;}
+		.l{order:-1;}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<header>
+			<span>#header</span>
+		</header>
+		<div class="cont">
+			<main class="c">#center</main>
+			<nav class="l">#left</nav>
+			<aside class="r">#right</aside>
+		</div>
+		<footer>
+			<span>#footer</span>
+		</footer>
+	</div>
+</body>
+</html>

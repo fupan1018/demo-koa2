@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div p{width:200px;height:100px;border:1px solid #333;}
+		div{display:-webkit-flex;display:flex;border:1px solid red;font-size:20px;}
+		/*justify-content:定义项目主轴的对齐方式*/
+		.box1{justify-content:flex-start;}
+		/*flex-start:代表从左侧对齐*/
+
+		.box2{justify-content:flex-end;}
+		/*flex-end:代表从右侧对齐*/
+
+		.box3{justify-content:center;}
+		/*center:中间对齐*/
+
+		.box4{justify-content:space-between;}
+		/*space-between 两端对齐*/
+
+		.box5{justify-content:space-around;}
+		/*space-around  项目之间等距间隔*/
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<p>11</p>
+		<p>22</p>
+	</div>
+	<div class="box2">
+		<p>11</p>
+		<p>22</p>
+	</div>
+	<div class="box3">
+		<p>11</p>
+		<p>22</p>
+		<p>33</p>
+	</div>
+	<div class="box4">
+		<p>11</p>
+		<p>22</p>
+		<p>33</p>
+	</div>
+
+	<div class="box5">
+		<p>11</p>
+		<p>22</p>
+		<p>33</p>
+	</div>
+</body>
+</html>

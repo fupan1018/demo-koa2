@@ -1,0 +1,5 @@
+ul {
+    width:100px;
+    color: rgba(200,200,200,0.8);
+    display: flex;
+}

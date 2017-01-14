@@ -1,0 +1,76 @@
+@charset "UTF-8";
+* { margin: 0; padding: 0; }
+
+body, html { width: 100%; height: 100%; }
+
+/*!.....................font-size set....................*/
+/*!..........如需文字在屏幕中恒定大小请加如下font**类名............*/
+div { font-size: 12px; }
+
+[data-dpr="2"] div { font-size: 24px; }
+
+[data-dpr="3"] div { font-size: 36px; }
+
+.font14 { font-size: 14px; }
+
+[data-dpr="2"] .font14 { font-size: 28px; }
+
+[data-dpr="3"] .font14 { font-size: 42px; }
+
+.font16 { font-size: 16px; }
+
+[data-dpr="2"] .font16 { font-size: 32px; }
+
+[data-dpr="3"] .font16 { font-size: 48px; }
+
+.font18 { font-size: 18px; }
+
+[data-dpr="2"] .font18 { font-size: 36px; }
+
+[data-dpr="3"] .font18 { font-size: 54px; }
+
+.font20 { font-size: 20px; }
+
+[data-dpr="2"] .font20 { font-size: 40px; }
+
+[data-dpr="3"] .font20 { font-size: 60px; }
+
+.font22 { font-size: 22px; }
+
+[data-dpr="2"] .font22 { font-size: 44px; }
+
+[data-dpr="3"] .font22 { font-size: 66px; }
+
+.container { width: 100%; height: auto; display: flex; }
+.container .bottom-list { flex: 1; height: inherit; list-style: none; display: flex; flex-wrap: wrap; }
+
+.flex-li { width: 100%; height: 2.147rem; display: flex; flex-wrap: nowrap; text-align: center; color: black; border-bottom: 0.02rem solid #e0e0e0; }
+
+.flex-li :nth-child(1) { flex: 90; }
+
+.flex-li :nth-child(2) { flex: 120; }
+
+.flex-li :nth-child(3) { flex: 327; }
+
+.flex-li :nth-child(4) { flex: 92; }
+
+.flex-li :nth-child(5) { flex: 121; }
+
+.bottom-list { font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.bottom-list .user-id-num { font: 700 0.6rem/2.147rem "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+.user-photo { background: url("../images/user_photo.png") no-repeat; background-size: contain; background-position: center center; }
+
+.user-name { align-items: center; font-size: 0.6rem; }
+.user-name .vip-icon { display: inline-block; border-radius: 0.2rem; width: 0.6rem; height: 0.4rem; background-color: #ff4747 !important; font-size: 0.27rem; text-align: center; line-height: 0.4rem; font-style: normal; color: #FFFFFF; margin: 0 0 0 0.2rem; vertical-align: middle; }
+
+.user-school { color: #aaaaaa; font-weight: 400; font-size: 0.3rem; }
+
+.user-info { display: flex; text-align: left; align-items: center; }
+.user-info .user-info-wrapper { padding-left: 0.5rem; }
+
+.user-grade { color: #aaaaaa; font: 400 0.4rem/2.147rem "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height: 2.147rem; }
+
+.yellow-play-btn { background: url("../images/yellow_play_btn.png") no-repeat; background-size: contain; }
+
+/*# sourceMappingURL=demo_flex.css.map */

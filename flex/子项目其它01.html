@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div p{width:200px;height:80px;border:1px solid #333;}
+		div{display:-webkit-flex;display:flex;border:1px solid red;font-size:20px;height:300px;}
+		/*flex-basis:定义了在分配多余空间之前，项目占据的主轴空间,浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小*/
+		.box1 .item02{flex-basis:200px;}
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<p class="item01">11</p>
+		<p class="item02">22</p>
+		<p class="item03">33</p>
+		<p class="item04">44</p>
+	</div>
+</body>
+</html>

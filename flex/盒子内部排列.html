@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{width:200px;height:200px;display:-webkit-flex;display:flex;border:1px solid red;font-size:20px;}
+		div p{border:1px solid #333;}
+		/*Webkit内核的浏览器，必须加上-webkit前缀。*/
+		/*flex-direction 设置盒子主轴的排列方向，他有四种值*/
+		.box1{flex-direction:row;}
+		/*row:主轴为水平方向，起点在左端。指的是盒子的内容*/
+		.box2{flex-direction:row-reverse;}
+		/*row-reverse:主轴为水平方向，起点在右端。指的是盒子的内容*/
+		.box3{flex-direction:column;}
+		/*column:主轴为垂直方向，起点在上沿。*/
+		.box4{flex-direction:column-reverse;}
+		/*column:主轴为垂直方向，起点在下沿。*/
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<p>11</p>
+		<p>22</p>
+	</div>
+	<div class="box2">
+		<p>33</p>
+		<p>44</p>
+	</div>
+	<div class="box3">
+		<p>55</p>
+		<p>66</p>
+	</div>
+	<div class="box4">
+		<p>77</p>
+		<p>88</p>
+	</div>
+</body>
+</html>

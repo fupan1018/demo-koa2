@@ -1,0 +1,222 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+/*!.....................font-size set....................*/
+/*!..........如需文字在屏幕中恒定大小请加如下font**类名............*/
+
+div {
+  font-size: 12px;
+}
+
+[data-dpr="2"] div {
+  font-size: 24px;
+}
+
+[data-dpr="3"] div {
+  font-size: 36px;
+}
+
+.font14 {
+  font-size: 14px;
+}
+
+[data-dpr="2"] .font14 {
+  font-size: 28px;
+}
+
+[data-dpr="3"] .font14 {
+  font-size: 42px;
+}
+
+.font16 {
+  font-size: 16px;
+}
+
+[data-dpr="2"] .font16 {
+  font-size: 32px;
+}
+
+[data-dpr="3"] .font16 {
+  font-size: 48px;
+}
+
+.font18 {
+  font-size: 18px;
+}
+
+[data-dpr="2"] .font18 {
+  font-size: 36px;
+}
+
+[data-dpr="3"] .font18 {
+  font-size: 54px;
+}
+
+.font20 {
+  font-size: 20px;
+}
+
+[data-dpr="2"] .font20 {
+  font-size: 40px;
+}
+
+[data-dpr="3"] .font20 {
+  font-size: 60px;
+}
+
+.font22 {
+  font-size: 22px;
+}
+
+[data-dpr="2"] .font22 {
+  font-size: 44px;
+}
+
+[data-dpr="3"] .font22 {
+  font-size: 66px;
+}
+
+
+$fontStack: "Microsoft Yahei","Helvetica Neue", Helvetica, Arial, sans-serif;
+$textGrey: #aaaaaa;
+
+@mixin px2rem($property,$px-values,$baseline-px:16px,$support-for-ie:false){
+  //Conver the baseline into rems
+  $baseline-rem: $baseline-px / 1rem * 1;
+  //Print the first line in pixel values
+  @if $support-for-ie {
+    #{$property}: $px-values;
+  }
+  //if there is only one (numeric) value, return the property/value line for it.
+  @if type-of($px-values) == "number"{
+    #{$property}: $px-values / $baseline-rem;
+  }
+  @else {
+    //Create an empty list that we can dump values into
+    $rem-values:();
+    @each $value in $px-values{
+      // If the value is zero or not a number, return it
+      @if $value == 0 or type-of($value) != "number"{
+        $rem-values: append($rem-values, $value / $baseline-rem);
+      }
+    }
+    // Return the property and its list of converted values
+    #{$property}: $rem-values;
+  }
+}
+
+.container {
+  width: 100%;
+  height: auto;
+  display: flex;
+
+  .bottom-list {
+    flex: 1;
+    height: inherit;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.flex-li {
+  width: 100%;
+  height: 2.147rem;
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  color: black;
+  border-bottom: 0.02rem solid #e0e0e0;
+  //@include px2rem(width,23px)
+  //show the way px changeinto rem;
+}
+
+.flex-li :nth-child(1) {
+  flex: 90;
+  //background-color: lightcoral;
+}
+
+.flex-li :nth-child(2) {
+  flex: 120;
+  //background-color: lightblue;
+}
+
+.flex-li :nth-child(3) {
+  flex: 327;
+  //background-color: aquamarine;
+}
+
+.flex-li :nth-child(4) {
+  flex: 92;
+  //background-color: lightslategrey;
+}
+
+.flex-li :nth-child(5) {
+  flex: 121;
+  //background-color: lightgoldenrodyellow;
+}
+
+.bottom-list {
+  font-family: $fontStack;
+  .user-id-num {
+    font: 700 0.6rem/2.147rem $fontStack;
+  }
+}
+
+.user-photo {
+  background: url("../images/user_photo.png") no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+.user-name {
+  align-items: center;
+  font-size: 0.6rem;
+  .vip-icon {
+    display: inline-block;
+    border-radius: 0.2rem;
+    width: 0.6rem;
+    height: 0.4rem;
+    background-color: #ff4747 !important;
+    font-size: 0.27rem;
+    text-align: center;
+    line-height: 0.4rem;
+    font-style: normal;
+    color: #FFFFFF;
+    margin: 0 0 0 0.2rem;
+    vertical-align: middle;
+  }
+}
+
+.user-school {
+  color: $textGrey;
+  font-weight: 400;
+  font-size: 0.3rem;
+}
+
+.user-info {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  .user-info-wrapper {
+    padding-left: 0.5rem;
+  }
+}
+
+.user-grade {
+  color: $textGrey;
+  font: 400 0.4rem/2.147rem $fontStack;
+  line-height: 2.147rem;
+}
+
+.yellow-play-btn {
+  background: url("../images/yellow_play_btn.png") no-repeat;
+  background-size: contain;
+}
