@@ -1,0 +1,10 @@
+.index1 {
+  background-color: red;
+}
+.index2 {
+  background-color: black;
+}
+.index3 {
+  background-color: blue;
+  transform: rotate(60deg);
+}
