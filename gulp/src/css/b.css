@@ -1,0 +1,25 @@
+*{
+  padding:1000px;
+  margin:0;
+  font-size:100px;
+  font-family:'宋体';
+}
+.box{
+  background:url(../img/me.jpg);
+}
+.div{
+  transform:translateX(50%);
+  display : flex;
+  border-radius : 5px;
+  border-radius:45px;
+  background : linear-gradient(to top, black, white);
+  transform:translateY(-50%);
+  width:400px;
+}
+::placeholder {
+  color : #ccc;
+}
+div:last-child{
+  width:10px;
+  transform:translateY(-50%);
+}
